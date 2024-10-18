@@ -19,9 +19,10 @@ class AuthController extends Controller
     public function register (Request $request){
 
         $validation = $request->validate([
-            'name' => ['required'],
+            'name' => 'required|string',
             'email' => 'email|unique:users',
-            'password' => ['required']
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required'
         ]);
 
         $passoed = Hash::make($validation['password']);
